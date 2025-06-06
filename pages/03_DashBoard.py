@@ -11,7 +11,7 @@ st.markdown("""
 На этой странице представлены основные результаты анализа данных и оценки моделей машинного обучения для задачи прогнозирования качества вина.
 """)
 
-image_dir = "C:\\Users\\Егор\\Desktop\\универ\\ML\\РГР\\grg_ml-main\\Dashboard"
+image_dir = "E:\\универ\\МЛ\\РГР\\grg_ml-main\\Dashboard"
 # Функция для отображения изображения с подписью
 def display_image_with_caption(image_path, caption):
     image = Image.open(os.path.join(image_dir, image_path))
@@ -53,12 +53,12 @@ with col2:
         "- Цвета отражают силу корреляции: от -1 до 1.\n"
         "- Выявляет наиболее значимые признаки.\n"
     )
-    display_image_with_caption(
-        "LGBMTree.png",
-        "Дерево LightGBM\n"
-        "- Визуализация одного из деревьев LightGBM.\n"
-        "- Помогает понять, какие признаки используются для принятия решений.\n"
-    )
+    #display_image_with_caption(
+    #    "LGBMTree.png",
+    #    "Дерево LightGBM\n"
+    #    "- Визуализация одного из деревьев LightGBM.\n"
+    #    "- Помогает понять, какие признаки используются для принятия решений.\n"
+    #)
     display_image_with_caption(
         "Lab2_Ridge.png",
         "Метрики Ridge Regressor\n"

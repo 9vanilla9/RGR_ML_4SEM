@@ -6,7 +6,7 @@ import os
 
 # Установка заголовка страницы
 st.set_page_config(page_title="Quality of Wine", layout="centered")
-st.title("Прогнозирование оценки качества вина")
+st.title("Прогнозирование оценки качества вина 🍷")
 
 st.markdown("Загрузите CSV-файл или введите данные вручную для получения прогноза.")
 
@@ -43,7 +43,7 @@ else:
                     df_uploaded = pd.read_csv(uploaded_file)
                     st.success("Файл успешно загружен!")
                     st.write("Предпросмотр данных:")
-                    st.dataframe(df_uploaded.head())
+                    st.dataframe(df_uploaded.head(10))
 
                     # Предсказание по файлу
                     if 'quality' in df_uploaded.columns:
@@ -53,6 +53,8 @@ else:
 
                     predictions = model.predict(X)
                     df_uploaded['predicted_quality'] = predictions
+                    st.write("Данные после предсказания:")
+                    st.dataframe(df_uploaded.head(10))
                     st.download_button(
                         label="Скачать с предсказаниями",
                         data=df_uploaded.to_csv(index=False),
@@ -93,7 +95,29 @@ else:
                 })
 
                 prediction = model.predict(input_data)[0]
-                st.success(f"⏳ Прогнозируемое качество вина: **{prediction} баллов.**")
+                if prediction >= 9:
+                    bg_color = "#09caec"  # зелёный
+                    text_color = "#0423CF"
+                elif prediction < 9 and prediction >=6:
+                    bg_color = "#5dcf00"  # красный
+                    text_color = "#1d2901bd"
+                elif prediction >= 3 and prediction <6:
+                    bg_color = "#c43a04"  # зелёный
+                    text_color = "#DFDB02"
+                elif prediction <3:
+                    bg_color = "#79010b"  # красный
+                    text_color = "#fab7bd"
+                st.markdown(
+                    f"""
+                    <div style="background-color: #fff3cd; color: #856404; padding: 12px; border-radius: 4px;">
+                        ⏳ Прогнозируемое качество вина: 
+                        <span style="background-color: {bg_color}; color: {text_color}; padding: 4px 8px; border-radius: 3px;">
+                            <strong>{prediction} баллов</strong>
+                        </span>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
 st.markdown("---")
 st.markdown("© 2025 — ML Trip Predictor App")
